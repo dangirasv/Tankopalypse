@@ -6,6 +6,7 @@ from settings import Settings
 from tank import Tank
 from button import Button
 from score import Score
+from sound import Sound
 
 
 def run_game():
@@ -22,6 +23,10 @@ def run_game():
     # Create instances for player names and lives
     score = Score(game_set, screen)
 
+    # Create instance for sound management, start title music
+    sound = Sound()
+    sound.play(sound.title_music, -1)  # -1 for continuous play
+
     # Create obstacles
     obstacles = Group()
     gf.create_obstacles(screen, obstacles)
@@ -34,15 +39,12 @@ def run_game():
     bullets1 = Group()
     bullets2 = Group()
 
-    pygame.mixer.music.load('sound/intro.ogg')
-    pygame.mixer.music.play(-1)  # (-1) means music will loop indefinitely
-
     while True:
-        gf.check_events(game_set, screen, p1, p2, bullets1, bullets2, play_button, score)
+        gf.check_events(game_set, screen, p1, p2, bullets1, bullets2, play_button, score, sound)
         if game_set.game_active:
             p1.update()
             p2.update()
-            gf.update_bullets(game_set, screen, p1, p2, obstacles, bullets1, bullets2, score)
+            gf.update_bullets(game_set, screen, p1, p2, obstacles, bullets1, bullets2, score, sound)
         gf.update_screen(game_set, screen, p1, p2, obstacles, bullets1, bullets2, play_button, score)
         main_clock.tick(60)  # limiting iterations per sec, or FPS
 
@@ -52,6 +54,5 @@ run_game()
 """
 To do:
 Fix player movement after reset if they last death in previous match was by obstacle collision.
-Create Sound class and move sound effects there
 Add tank explosion animation 
 """

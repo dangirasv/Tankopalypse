@@ -20,10 +20,8 @@ class Score():
 		
 	def prep_players(self):
 		"""Prepare player names and their possition on screen"""
-		self.p1_image = self.font.render('Player 1', True, self.text_color,
-			self.game_set.name_bg_color)
-		self.p2_image = self.font.render('Player 2', True, self.text_color,
-			self.game_set.name_bg_color)
+		self.p1_image = self.font.render('Player 1', True, self.text_color, self.game_set.name_bg_color)
+		self.p2_image = self.font.render('Player 2', True, self.text_color, self.game_set.name_bg_color)
 		
 		self.p1_image_rect = self.p1_image.get_rect()
 		self.p1_image_rect.left = 30

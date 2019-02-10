@@ -1,9 +1,9 @@
-import pygame
+"""import pygame
 
 # Initialising sound settings for smoother play
 pygame.mixer.pre_init(44100, -16, 2, 2048)
 pygame.mixer.init()
-pygame.init()
+pygame.init()"""
 
 
 class Settings():
@@ -40,9 +40,3 @@ class Settings():
         
         # always starting game in an inactive mode
         self.game_active = False
-        
-        # load sound effects
-        self.p1_fire = pygame.mixer.Sound('sound/tank_fire01.ogg')
-        self.p2_fire = pygame.mixer.Sound('sound/tank_fire02.ogg')
-        self.explosion = pygame.mixer.Sound('sound/explosion.ogg')
-        self.confirm = pygame.mixer.Sound('sound/confirm.ogg')
