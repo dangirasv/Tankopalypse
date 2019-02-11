@@ -11,7 +11,7 @@ class Bullet(Sprite):
 		self.game_set = game_set
 		self.player = player
 		
-		self.image_u = pygame.image.load('images/bullet_blue_u.png').convert_alpha()
+		self.image_u = pygame.image.load('images/bullet_blue_u.png').convert_alpha()  # alpha for see-through background
 		self.image_r = pygame.image.load('images/bullet_blue_r.png').convert_alpha()
 		self.image_d = pygame.image.load('images/bullet_blue_d.png').convert_alpha()
 		self.image_l = pygame.image.load('images/bullet_blue_l.png').convert_alpha()

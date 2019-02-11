@@ -20,6 +20,10 @@ def run_game():
     # Create the Play button
     play_button = Button(game_set, screen, 'Play')
 
+    # Create Player tanks
+    p1 = Tank(game_set, screen, 'black', 'p1')
+    p2 = Tank(game_set, screen, 'red', 'p2')
+
     # Create instances for player names and lives
     score = Score(game_set, screen)
 
@@ -30,10 +34,6 @@ def run_game():
     # Create obstacles
     obstacles = Group()
     gf.create_obstacles(screen, obstacles)
-
-    # Create Player tanks
-    p1 = Tank(game_set, screen, 'black', 'p1')
-    p2 = Tank(game_set, screen, 'red', 'p2')
 
     # Create two bullet groups, each for separate player
     bullets1 = Group()
@@ -53,6 +53,5 @@ run_game()
 
 """
 To do:
-Fix player movement after reset if they last death in previous match was by obstacle collision.
-Add tank explosion animation 
+Add tank explosion animation
 """

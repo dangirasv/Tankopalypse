@@ -76,7 +76,7 @@ def check_keydown_events(event, game_set, screen, p1, p2, bullets1, bullets2, so
 
 def check_keyup_events(event, p1, p2):
     """Respond to key release, continuously checking if previously pressed buttons before the one that's being checked
-    have been released or on, if not - continue the movement in that direction"""
+    have been released or not. If previously pressed key is still held - continue the movement in previous direction"""
     if event.key == pygame.K_w:
         p1.moving_up = False
         p1.w = False
@@ -165,11 +165,11 @@ def player_obs_col(game_set, screen, p1, p2, obstacles, bullets1, bullets2, scor
     """Check if tanks smash in the obstacles"""
     if pygame.sprite.spritecollideany(p1, obstacles):
         sound.explosion.play()
-        p1_hit(game_set, score)
+        p1_hit(game_set, score, p1)
         reset_stage(game_set, screen, p1, p2, bullets1, bullets2, sound)
     elif pygame.sprite.spritecollideany(p2, obstacles):
         sound.explosion.play()
-        p2_hit(game_set, score)
+        p2_hit(game_set, score, p2)
         reset_stage(game_set, screen, p1, p2, bullets1, bullets2, sound)
     
         
@@ -263,11 +263,11 @@ def update_bullets(game_set, screen, p1, p2, obstacles, bullets1, bullets2, scor
     # checking if player hit opposing player with bullets
     if pygame.sprite.spritecollideany(p2, bullets1):  # p1 hit p2
         sound.explosion.play()
-        p2_hit(game_set, score)
+        p2_hit(game_set, score, p2)
         reset_stage(game_set, screen, p1, p2, bullets1, bullets2, sound)
     if pygame.sprite.spritecollideany(p1, bullets2):
         sound.explosion.play()
-        p1_hit(game_set, score)
+        p1_hit(game_set, score, p1)
         reset_stage(game_set, screen, p1, p2, bullets1, bullets2, sound)
     # check collision between bullets and tank collision with walls
     pygame.sprite.groupcollide(bullets1, bullets2, True, True)  # remove bullets that collided with each other
@@ -285,11 +285,17 @@ def del_bullets(bullets, obstacles):
             bullets.remove(bullet)
 
 
-def p1_hit(game_set, score):
+def p1_hit(game_set, score, p1):
+    p1.image = p1.image_explode
+    p1.blitme()
+    pygame.display.flip()
     game_set.p1_lives -= 1
     score.prep_lives()
 
 
-def p2_hit(game_set, score):
+def p2_hit(game_set, score, p2):
+    p2.image = p2.image_explode
+    p2.blitme()
+    pygame.display.flip()
     game_set.p2_lives -= 1
     score.prep_lives()

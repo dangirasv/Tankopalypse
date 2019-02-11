@@ -10,7 +10,8 @@ class Tank(Sprite):
 		self.screen = screen
 		self.game_set = game_set
 		self.color = color
-		
+
+		# set up tank location and facing direction (taken from settings class) depending on which players thank it is
 		self.loc_x = eval('game_set.' + player + '_start_loc_x')
 		self.loc_y = eval('game_set.' + player + '_start_loc_y')
 		self.facing = eval('game_set.' + player + '_start_facing')
@@ -20,6 +21,7 @@ class Tank(Sprite):
 		self.image_r = pygame.image.load('images/tank_' + color + '_r.bmp').convert()
 		self.image_d = pygame.image.load('images/tank_' + color + '_d.bmp').convert()
 		self.image_l = pygame.image.load('images/tank_' + color + '_l.bmp').convert()
+		self.image_explode = pygame.image.load('images/smoke.png').convert_alpha()
 		self.rect = self.image_u.get_rect()
 		self.screen_rect = screen.get_rect()
 		# starting tank position and facing direction
@@ -35,7 +37,7 @@ class Tank(Sprite):
 		self.moving_right = False
 		self.moving_down = False
 		self.moving_left = False
-				
+
 		self.w = False
 		self.d = False
 		self.s = False
